@@ -41,7 +41,6 @@ public class StockInActivity extends AppCompatActivity {
 
         resultScan.requestFocus();
         resultScan.setShowSoftInputOnFocus(false);
-
         resultScan.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {

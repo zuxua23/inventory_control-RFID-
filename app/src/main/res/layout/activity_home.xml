@@ -18,7 +18,10 @@
             android:id="@+id/ivProfile"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@drawable/account_icon" />
+            android:src="@drawable/account_icon"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?android:attr/selectableItemBackgroundBorderless" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -172,8 +175,9 @@
                             android:layout_width="77dp"
                             android:layout_height="69dp"
                             android:src="@drawable/stock_in_icon"
+                            android:padding="8dp"
                             android:background="@drawable/bg_badge_card_menu"
-                            android:padding="8dp"/>
+                            android:foreground="@drawable/bg_menu_selector"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -199,7 +203,8 @@
                             android:layout_height="69dp"
                             android:background="@drawable/bg_badge_card_menu"
                             android:padding="8dp"
-                            android:src="@drawable/stock_preparation_icon" />
+                            android:src="@drawable/stock_preparation_icon"
+                            android:foreground="@drawable/bg_menu_selector"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -224,6 +229,7 @@
                             android:layout_width="77dp"
                             android:layout_height="69dp"
                             android:background="@drawable/bg_badge_card_menu"
+                            android:foreground="@drawable/bg_menu_selector"
                             android:padding="8dp"
                             android:src="@drawable/stock_taking_icon" />
 
@@ -252,6 +258,7 @@
                             android:layout_height="69dp"
                             android:src="@drawable/tag_icon"
                             android:background="@drawable/bg_badge_card_menu"
+                            android:foreground="@drawable/bg_menu_selector"
                             android:padding="8dp"/>
 
                         <TextView
@@ -278,6 +285,7 @@
                             android:layout_width="77dp"
                             android:layout_height="69dp"
                             android:background="@drawable/bg_badge_card_menu"
+                            android:foreground="@drawable/bg_menu_selector"
                             android:padding="8dp"
                             android:src="@drawable/seacrh_item_icon" />
 

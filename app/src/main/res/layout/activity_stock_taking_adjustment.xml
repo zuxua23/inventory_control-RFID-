@@ -102,7 +102,7 @@
         android:layout_marginHorizontal="10dp"
         android:layout_marginBottom="12dp"
         app:cardCornerRadius="20dp"
-        app:cardElevation="6dp"
+        app:cardElevation="4dp"
         app:cardBackgroundColor="@color/white"
         app:layout_constraintTop_toBottomOf="@id/cardInfo"
         app:layout_constraintBottom_toTopOf="@id/linearButton">
@@ -151,7 +151,7 @@
                         android:fontFamily="@font/raleway_bold"
                         android:text="RFID"
                         android:textColor="@color/blue_theme"
-                        android:textSize="14sp" />
+                        android:textSize="18sp" />
 
                     <Switch
                         android:id="@+id/switchRfid"
@@ -189,64 +189,65 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingHorizontal="16dp"
-        android:paddingVertical="10dp"
-        android:gravity="center_vertical"
-        android:weightSum="2"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        android:paddingVertical="12dp"
+        android:gravity="center"
+        android:weightSum="10"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/btnRefresh"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:layout_marginEnd="8dp"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="6dp"
-            app:cardBackgroundColor="@color/white"
+            android:layout_width="135dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="2"
+            android:background="@drawable/bg_btn_refresh"
             android:clickable="true"
             android:focusable="true"
-            android:foreground="?android:attr/selectableItemBackground">
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="20dp"
+            >
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_btn_refresh"
+                android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:gravity="center">
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="12dp">
 
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
+                    android:layout_marginEnd="8dp"
                     android:src="@drawable/ic_reload"
-                    app:tint="@color/blue_theme"
-                    android:layout_marginEnd="8dp"/>
+                    app:tint="@color/blue_theme" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="76dp"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/raleway_bold"
                     android:text="Refresh"
                     android:textColor="@color/blue_theme"
-                    android:textSize="18sp"
-                    android:fontFamily="@font/raleway_bold"/>
+                    android:textSize="18sp" />
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <Button
             android:id="@+id/btnSave"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_marginStart="8dp"
+            android:layout_width="150dp"
+            android:layout_height="60dp"
+            android:backgroundTint="@color/green_button"
             android:fontFamily="@font/raleway_bold"
-            android:backgroundTint="#01C470"
             android:stateListAnimator="@null"
             android:text="Save"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            android:textSize="16sp"
-            app:cornerRadius="15dp" />
+            android:textSize="18sp"
+            app:cornerRadius="20dp"
+            android:foreground="?android:attr/selectableItemBackground" />
 
     </LinearLayout>
 

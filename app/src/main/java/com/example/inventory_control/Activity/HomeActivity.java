@@ -105,9 +105,9 @@ public class HomeActivity extends AppCompatActivity {
         btnSearchItem.setOnClickListener(menuClickListener);
     }
 
-    // Method khusus buat nampilin tombol Logout melayang
     private void showLogoutPopup(View anchorView) {
         CardView cardView = new CardView(this);
+        // Warna normal: Merah (#C62828)
         cardView.setCardBackgroundColor(Color.parseColor("#C62828"));
         cardView.setRadius(40f);
         cardView.setCardElevation(8f);
@@ -120,7 +120,6 @@ public class HomeActivity extends AppCompatActivity {
 
         Typeface typeface = ResourcesCompat.getFont(this, R.font.raleway_bold);
         tvLogout.setTypeface(typeface);
-
         cardView.addView(tvLogout);
 
         PopupWindow popupWindow = new PopupWindow(cardView,
@@ -131,11 +130,30 @@ public class HomeActivity extends AppCompatActivity {
         popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         popupWindow.showAsDropDown(anchorView, 0, -20);
 
+        // --- TAMBAHIN EFEK HANGOVER DI SINI BRE ---
+        cardView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, android.view.MotionEvent event) {
+                if (event.getAction() == android.view.MotionEvent.ACTION_DOWN) {
+                    // Pas ditekan: Warna jadi Merah lebih gelap (#8E1C1C)
+                    cardView.setCardBackgroundColor(Color.parseColor("#8E1C1C"));
+                    // Efek mengecil dikit biar interaktif
+                    cardView.animate().scaleX(0.95f).scaleY(0.95f).setDuration(50).start();
+                } else if (event.getAction() == android.view.MotionEvent.ACTION_UP ||
+                        event.getAction() == android.view.MotionEvent.ACTION_CANCEL) {
+                    // Pas dilepas: Balikin ke warna asal
+                    cardView.setCardBackgroundColor(Color.parseColor("#C62828"));
+                    cardView.animate().scaleX(1f).scaleY(1f).setDuration(50).start();
+                }
+                return false; // False biar onClickListener di bawah tetep jalan
+            }
+        });
+
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                popupWindow.dismiss(); // Tutup tombol merah melayangnya
-                showLogoutConfirmationDialog(); // Panggil dialog konfirmasi Yes/No
+                popupWindow.dismiss();
+                showLogoutConfirmationDialog();
             }
         });
     }

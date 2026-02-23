@@ -152,7 +152,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="RFID"
-                        android:textSize="18dp"
+                        android:textSize="20sp"
                         android:textColor="@color/blue_theme"
                         android:fontFamily="@font/raleway_bold"
                         android:layout_marginEnd="8dp"/>
@@ -198,7 +198,7 @@
                 android:layout_height="wrap_content"
                 android:text="List Tag:"
                 android:textColor="@color/blue_theme"
-                android:textSize="22sp"
+                android:textSize="20sp"
                 android:fontFamily="@font/raleway_bold"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
@@ -234,7 +234,6 @@
         app:cardBackgroundColor="@color/white"
         android:clickable="true"
         android:focusable="true"
-        android:foreground="?android:attr/selectableItemBackground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
@@ -244,6 +243,7 @@
             android:orientation="horizontal"
             android:paddingHorizontal="20dp"
             android:paddingVertical="12dp"
+            android:background="@drawable/bg_btn_refresh"
             android:gravity="center_vertical">
 
             <ImageView

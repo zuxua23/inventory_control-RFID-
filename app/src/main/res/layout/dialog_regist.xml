@@ -47,7 +47,7 @@
             <Button
                 android:id="@+id/btnNo"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:layout_marginEnd="8dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/merah"
@@ -56,13 +56,13 @@
                 android:text="No"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:textSize="15dp"
-                app:cornerRadius="30dp" />
+                android:textSize="18dp"
+                app:cornerRadius="20dp" />
 
             <Button
                 android:id="@+id/btnYes"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:layout_marginStart="8dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/raleway_bold"
@@ -71,8 +71,8 @@
                 android:text="Yes"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:textSize="15dp"
-                app:cornerRadius="30dp" />
+                android:textSize="18dp"
+                app:cornerRadius="20dp" />
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

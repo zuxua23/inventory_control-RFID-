@@ -51,6 +51,8 @@
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:background="@drawable/bg_linear_white"
+                android:stateListAnimator="@null"
+                android:foreground="?android:attr/selectableItemBackground"
                 android:src="@drawable/ic_ceklis" />
         </LinearLayout>
 
@@ -74,10 +76,10 @@
                 android:backgroundTint="@color/merah"
                 android:fontFamily="@font/raleway_bold"
                 android:stateListAnimator="@null"
-                android:text="Cancel"
+                android:foreground="?android:attr/selectableItemBackground"                android:text="Cancel"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:textSize="20dp"
+                android:textSize="18dp"
                 app:cornerRadius="30dp" />
 
             <Button
@@ -89,10 +91,10 @@
                 android:fontFamily="@font/raleway_bold"
                 android:backgroundTint="#01C470"
                 android:stateListAnimator="@null"
-                android:text="Apply"
+                android:foreground="?android:attr/selectableItemBackground"                android:text="Apply"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:textSize="20dp"
+                android:textSize="18dp"
                 app:cornerRadius="30dp" />
         </LinearLayout>
     </LinearLayout>

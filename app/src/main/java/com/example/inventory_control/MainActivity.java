@@ -11,7 +11,7 @@ import com.example.inventory_control.Activity.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final int SPLASH_TIME_OUT = 3000;
+    private static final int SPLASH_TIME_OUT = 1500;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

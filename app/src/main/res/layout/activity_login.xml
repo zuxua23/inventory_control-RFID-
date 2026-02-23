@@ -131,13 +131,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
                         android:backgroundTint="@color/green_button"
-                        android:elevation="2dp"
-                        android:stateListAnimator="@null"
                         android:text="SIGN IN"
                         android:fontFamily="@font/raleway_bold"
+                        android:stateListAnimator="@null"
                         android:textColor="@color/white"
-                        android:textSize="16sp"
-                        app:cornerRadius="12dp" />
+                        android:textSize="18sp"
+                        app:cornerRadius="20dp" />
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -154,7 +153,8 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@drawable/ic_setting_24"
-            android:background="@drawable/bg_linear_white"
-            app:tint="#717373" />
+            android:background="@drawable/bg_btn_setting"
+            android:stateListAnimator="@null"
+            app:tint="@color/black" />
     </LinearLayout>
 </FrameLayout>

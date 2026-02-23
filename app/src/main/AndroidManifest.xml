@@ -26,11 +26,26 @@
         </activity>
         <activity android:name=".Activity.LoginActivity" android:exported="false" />
         <activity android:name=".Activity.HomeActivity" android:exported="false" />
-        <activity android:name=".Activity.StockInActivity" android:exported="false" />
+        <activity
+            android:name=".Activity.StockInActivity"
+            android:exported="false"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+
         <activity android:name=".Activity.StockPrepActivity" android:exported="false" />
-        <activity android:name=".Activity.StockPrepProductActivity" android:exported="false" />
-        <activity android:name=".Activity.StockTakingActivity" android:exported="false" />
-        <activity android:name=".Activity.TagRegisActivity" android:exported="false" />
+        <activity
+            android:name=".Activity.StockPrepProductActivity"
+            android:exported="false"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+
+        <activity
+            android:name=".Activity.StockTakingActivity"
+            android:exported="false"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+
+        <activity
+            android:name=".Activity.TagRegisActivity"
+            android:exported="false"
+            android:windowSoftInputMode="stateAlwaysHidden" />
     </application>
 
 </manifest>

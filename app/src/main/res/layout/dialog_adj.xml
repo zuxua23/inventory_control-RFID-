@@ -33,7 +33,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="8dp"
             android:text="What's Your Choice?"
             android:textSize="22sp"
             android:fontFamily="@font/raleway_bold"
@@ -50,7 +50,7 @@
             <Button
                 android:id="@+id/btnRemove"
                 android:layout_width="150dp"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:backgroundTint="@color/merah"
                 android:fontFamily="@font/raleway_bold"
                 android:stateListAnimator="@null"
@@ -58,21 +58,20 @@
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="16sp"
-                app:cornerRadius="30dp" />
+                app:cornerRadius="20dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="8dp"
                 android:text="Or"
-                android:textSize="16sp"
+                android:textSize="12sp"
                 android:fontFamily="@font/raleway_bold"
                 android:textColor="@color/black" />
 
             <Button
                 android:id="@+id/btnAddManual"
                 android:layout_width="150dp"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:fontFamily="@font/raleway_bold"
                 android:backgroundTint="#01C470"
                 android:stateListAnimator="@null"
@@ -80,7 +79,7 @@
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="16sp"
-                app:cornerRadius="30dp" />
+                app:cornerRadius="20dp" />
 
         </LinearLayout>
     </LinearLayout>
