@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:text="[Product ID]"
             android:textColor="#FFFFFF"
-            android:textSize="15sp"
+            android:textSize="12sp"
             android:fontFamily="@font/raleway_bold" />
 
         <TextView
@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:text="[Product name]"
             android:textColor="#FFFFFF"
-            android:textSize="15sp"
+            android:textSize="12sp"
             android:textStyle="bold"
             android:fontFamily="@font/raleway_bold" />
 

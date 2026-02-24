@@ -6,6 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="30dp"
     android:elevation="10dp"
+    android:layout_margin="20dp"
     app:cardBackgroundColor="@color/white">
 
     <ImageButton
@@ -25,17 +26,16 @@
         android:padding="24dp">
 
         <ImageView
-            android:layout_width="77dp"
-            android:layout_height="87dp"
-            android:layout_marginTop="8dp"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
             android:src="@drawable/ic_question_alert" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="5dp"
             android:text="What's Your Choice?"
-            android:textSize="22sp"
+            android:textSize="18sp"
             android:fontFamily="@font/raleway_bold"
             android:textAlignment="center"
             android:textColor="@color/black" />
@@ -43,21 +43,21 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="20dp"
             android:orientation="vertical"
             android:gravity="center">
 
             <Button
                 android:id="@+id/btnRemove"
-                android:layout_width="150dp"
-                android:layout_height="60dp"
+                android:layout_width="130dp"
+                android:layout_height="40dp"
                 android:backgroundTint="@color/merah"
                 android:fontFamily="@font/raleway_bold"
                 android:stateListAnimator="@null"
                 android:text="Remove"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:textSize="16sp"
+                android:textSize="13sp"
                 app:cornerRadius="20dp" />
 
             <TextView
@@ -70,15 +70,15 @@
 
             <Button
                 android:id="@+id/btnAddManual"
-                android:layout_width="150dp"
-                android:layout_height="60dp"
+                android:layout_width="130dp"
+                android:layout_height="40dp"
                 android:fontFamily="@font/raleway_bold"
                 android:backgroundTint="#01C470"
                 android:stateListAnimator="@null"
                 android:text="Add Manual"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:textSize="16sp"
+                android:textSize="13sp"
                 app:cornerRadius="20dp" />
 
         </LinearLayout>

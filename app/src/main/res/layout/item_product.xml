@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:text="[Product ID]"
                 android:textColor="@color/white"
-                android:textSize="15sp"
+                android:textSize="12sp"
                 android:fontFamily="@font/raleway_bold" />
 
             <TextView
@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:text="[Product name]"
                 android:textColor="@color/white"
-                android:textSize="15sp"
+                android:textSize="12sp"
                 android:textStyle="bold"
                 android:fontFamily="@font/raleway_bold" />
 
@@ -50,7 +50,7 @@
             android:fontFamily="@font/raleway_bold"
             android:text="Qty: 1"
             android:textColor="@color/white"
-            android:textSize="15sp"
+            android:textSize="12sp"
             android:textStyle="bold" />
 
     </LinearLayout>

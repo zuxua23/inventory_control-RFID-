@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:text="[DO NO]"
             android:textColor="#FFFFFF"
-            android:textSize="15sp"
+            android:textSize="12sp"
             android:fontFamily="@font/raleway_bold" />
 
         <TextView
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:text="[DO name]"
             android:textColor="#FFFFFF"
-            android:textSize="15sp"
+            android:textSize="12sp"
             android:textStyle="bold"
             android:fontFamily="@font/raleway_bold" />
     </LinearLayout>
