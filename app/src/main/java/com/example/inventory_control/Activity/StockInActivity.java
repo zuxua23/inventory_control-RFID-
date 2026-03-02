@@ -10,12 +10,18 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.inventory_control.Adapter.ItemAdapter;
+import com.example.inventory_control.Models.ItemModel;
 import com.example.inventory_control.R;
 import com.google.android.material.snackbar.Snackbar;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class StockInActivity extends AppCompatActivity {
 
@@ -25,87 +31,139 @@ public class StockInActivity extends AppCompatActivity {
     private EditText resultScan;
     private TextView tvScanned;
     private int scanCount = 0;
+    private RecyclerView rvTags;
+    private ItemAdapter adapter;
+    private List<ItemModel> scannedItemsList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stock_in);
 
-        // 1. Inisialisasi View
         btnBack = findViewById(R.id.btnBack);
         btnClear = findViewById(R.id.btnClear);
         btnSave = findViewById(R.id.btnSave);
         switchRfid = findViewById(R.id.switchRfid);
         resultScan = findViewById(R.id.resultScan);
         tvScanned = findViewById(R.id.tvScanned);
+        rvTags = findViewById(R.id.rvTags);
+
+        scannedItemsList = new ArrayList<>();
+        adapter = new ItemAdapter(scannedItemsList);
+        rvTags.setLayoutManager(new LinearLayoutManager(this));
+        rvTags.setAdapter(adapter);
+
+        scannedItemsList.add(new ItemModel("112233", "ITM001", "Kemeja Anti Kusut", 1));
+        scannedItemsList.add(new ItemModel("445566", "ITM002", "Vans Japan Edition", 2));
+        adapter.notifyDataSetChanged();
+
+        scanCount = 3;
+        tvScanned.setText("Scanned: " + scanCount);
 
         resultScan.requestFocus();
         resultScan.setShowSoftInputOnFocus(false);
         resultScan.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                // Scanner biasanya ngirim event KEYCODE_ENTER atau action done/next
                 if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_NEXT ||
                         (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN)) {
 
-                    // Ambil hasil scan-nya
                     String rfidData = resultScan.getText().toString().trim();
 
                     if (!rfidData.isEmpty()) {
+                        ItemModel foundItem = lookupDummyData(rfidData);
 
-                        // Update angka di TextView Scanned
-                        scanCount++;
-                        tvScanned.setText("Scanned: " + scanCount);
+                        if (foundItem != null) {
+                            boolean isExist = false;
+                            for (int i = 0; i < scannedItemsList.size(); i++) {
+                                if (scannedItemsList.get(i).getEpcTag().equals(rfidData)) {
+                                    int currentQty = scannedItemsList.get(i).getQty();
+                                    scannedItemsList.get(i).setQty(currentQty + 1);
+                                    adapter.notifyItemChanged(i);
+                                    isExist = true;
+                                    break;
+                                }
+                            }
 
-                        Toast.makeText(StockInActivity.this, "Berhasil scan: " + rfidData, Toast.LENGTH_SHORT).show();
+                            if (!isExist) {
+                                scannedItemsList.add(new ItemModel(foundItem.getEpcTag(), foundItem.getItemId(), foundItem.getItemName(), 1));
+                                adapter.notifyItemInserted(scannedItemsList.size() - 1);
+                                rvTags.scrollToPosition(scannedItemsList.size() - 1);
+                            }
 
-                        // Kosongin lagi EditText-nya buat nangkep scan berikutnya
+                            scanCount++;
+                            tvScanned.setText("Scanned: " + scanCount);
+
+                            View rootView = findViewById(android.R.id.content);
+                            Snackbar.make(rootView, "Berhasil scan: " + foundItem.getItemName(), Snackbar.LENGTH_SHORT).show();
+                        } else {
+                            View rootView = findViewById(android.R.id.content);
+                            Snackbar.make(rootView, "Tag RFID gak dikenali bre!", Snackbar.LENGTH_SHORT).show();
+                        }
                         resultScan.setText("");
                     }
-
-                    // Balikin fokus ke resultScan lagi biar siap scan barang ke-2
                     resultScan.requestFocus();
                     return true;
                 }
                 return false;
             }
-        });        btnBack.setOnClickListener(new View.OnClickListener() {
+        });
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // finish() berfungsi buat nutup halaman saat ini dan otomatis balik ke halaman sebelumnya
                 finish();
             }
         });
 
-        // 3. Logic Switch RFID (Deteksi ON / OFF)
         switchRfid.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    // Angka 1000 di belakang itu durasinya = 1000 milidetik (1 detik)
-                    Snackbar.make(findViewById(android.R.id.content), "Mode RFID: ON", 1000).show();
-                } else {
-                    Snackbar.make(findViewById(android.R.id.content), "Mode RFID: OFF", 1000).show();
-                }
+                View rootView = findViewById(android.R.id.content);
+                String msg = isChecked ? "Mode RFID: ON" : "Mode RFID: OFF";
+                Snackbar.make(rootView, msg, 1000).show();
+
+                if(isChecked) resultScan.requestFocus();
             }
         });
 
-        // 4. Logic Tombol Clear
         btnClear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Nanti code buat hapus isi list/RecyclerView ditaruh di sini
-                Toast.makeText(StockInActivity.this, "List dibersihkan", Toast.LENGTH_SHORT).show();
+                scannedItemsList.clear();
+                adapter.notifyDataSetChanged();
+                scanCount = 0;
+                tvScanned.setText("Scanned: 0");
+                resultScan.requestFocus();
+
+                View rootView = findViewById(android.R.id.content);
+                Snackbar.make(rootView, "List berhasil dibersihkan", Snackbar.LENGTH_SHORT).show();
             }
         });
 
-        // 5. Logic Tombol Save
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Nanti code buat nge-hit API Simpan Data ditaruh di sini
-                Toast.makeText(StockInActivity.this, "Data berhasil disimpan!", Toast.LENGTH_SHORT).show();
+                if (scannedItemsList.isEmpty()) {
+                    View rootView = findViewById(android.R.id.content);
+                    Snackbar.make(rootView, "Belum ada barang yang di-scan bre!", Snackbar.LENGTH_SHORT).show();
+                    return;
+                }
+
+                View rootView = findViewById(android.R.id.content);
+                Snackbar.make(rootView, "Data " + scanCount + " item berhasil disimpan!", Snackbar.LENGTH_LONG).show();
             }
         });
+    }
+
+    private ItemModel lookupDummyData(String epcTag) {
+        if (epcTag.equalsIgnoreCase("112233")) {
+            return new ItemModel("112233", "ITM001", "Kemeja Anti Kusut", 1);
+        } else if (epcTag.equalsIgnoreCase("445566")) {
+            return new ItemModel("445566", "ITM002", "Vans Japan Edition", 1);
+        } else if (epcTag.equalsIgnoreCase("778899")) {
+            return new ItemModel("778899", "ITM003", "Trucker Hat Custom", 1);
+        }
+        return null;
     }
 }

@@ -34,10 +34,8 @@ public class StockTakingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Pastiin ini sesuai sama nama file XML utama Stock Taking lu
         setContentView(R.layout.activity_stock_taking_adjustment);
 
-        // 1. Inisialisasi View
         btnBack = findViewById(R.id.btnBack);
         switchRfid = findViewById(R.id.switchRfid);
         cardlistTag = findViewById(R.id.cardlistTag);
@@ -45,7 +43,6 @@ public class StockTakingActivity extends AppCompatActivity {
         btnSave = findViewById(R.id.btnSave);
         resultScan = findViewById(R.id.resultScan);
 
-        // 2. Logic Tombol Back
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,7 +50,6 @@ public class StockTakingActivity extends AppCompatActivity {
             }
         });
 
-        // 3. Logic Switch RFID
         switchRfid.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -61,7 +57,6 @@ public class StockTakingActivity extends AppCompatActivity {
             }
         });
 
-        // 4. Logic Refresh & Save
         btnRefresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,7 +71,6 @@ public class StockTakingActivity extends AppCompatActivity {
             }
         });
 
-        // 5. Logic Scanner
         resultScan.requestFocus();
         resultScan.setShowSoftInputOnFocus(false);
         resultScan.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -97,8 +91,6 @@ public class StockTakingActivity extends AppCompatActivity {
             }
         });
 
-        // 6. SIMULASI KLIK ITEM LIST (Trigger Dialog Adjustment)
-        // Nanti dipindah ke dalem Adapter RecyclerView
         cardlistTag.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,12 +99,10 @@ public class StockTakingActivity extends AppCompatActivity {
         });
     }
 
-    // Method buat nampilin Dialog Pilihan "What's Your Choice?"
     private void showAdjustmentDialog() {
         Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-        // TODO: Ganti nama layout ini sesuai nama file XML dialog konfirmasi lu
         dialog.setContentView(R.layout.dialog_adj);
 
         if (dialog.getWindow() != null) {
@@ -124,7 +114,6 @@ public class StockTakingActivity extends AppCompatActivity {
         Button btnRemove = dialog.findViewById(R.id.btnRemove);
         Button btnAddManual = dialog.findViewById(R.id.btnAddManual);
 
-        // Logic kalau tombol FAQ di klik -> Buka dialog FAQ
         btnFaq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -132,7 +121,6 @@ public class StockTakingActivity extends AppCompatActivity {
             }
         });
 
-        // Logic tombol Remove
         btnRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -141,7 +129,6 @@ public class StockTakingActivity extends AppCompatActivity {
             }
         });
 
-        // Logic tombol Add Manual
         btnAddManual.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -153,17 +140,14 @@ public class StockTakingActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    // Method buat nampilin Dialog FAQ
     private void showFaqDialog() {
         Dialog faqDialog = new Dialog(this);
         faqDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-        // TODO: Ganti nama layout ini sesuai nama file XML dialog FAQ lu
         faqDialog.setContentView(R.layout.dialog_faq);
 
         if (faqDialog.getWindow() != null) {
             faqDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            // Kasih margin sedikit biar dialog FAQ gak terlalu mepet ke pinggir layar
             int width = (int)(getResources().getDisplayMetrics().widthPixels * 0.90);
             faqDialog.getWindow().setLayout(width, ViewGroup.LayoutParams.WRAP_CONTENT);
         }

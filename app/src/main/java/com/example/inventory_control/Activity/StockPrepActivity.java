@@ -2,61 +2,48 @@ package com.example.inventory_control.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import com.example.inventory_control.Adapter.DOAdapter;
+import com.example.inventory_control.Models.DOModel;
 import com.example.inventory_control.R;
+import com.google.android.material.snackbar.Snackbar;
+import java.util.ArrayList;
+import java.util.List;
 
 public class StockPrepActivity extends AppCompatActivity {
-
-    private ImageView btnBack;
-    private CardView btnRefresh;
-    private CardView cardlistTag; // Kita pake area ini buat trigger klik pindah halaman sementara
+    private RecyclerView rvTags;
+    private DOAdapter adapter;
+    private List<DOModel> doList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Pastiin XML ini nampilin daftar Delivery Order
         setContentView(R.layout.activity_stock_prep_delivery_order);
 
-        btnBack = findViewById(R.id.btnBack);
-        btnRefresh = findViewById(R.id.btnRefresh);
-        cardlistTag = findViewById(R.id.cardlistTag);
+        findViewById(R.id.btnBack).setOnClickListener(v -> finish());
 
-        // Tombol Back
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
+        rvTags = findViewById(R.id.rvTags);
+        doList = new ArrayList<>();
+
+        doList.add(new DOModel("1", "DO-2026-001", "Customer A - Jakarta", "02-03-2026"));
+        doList.add(new DOModel("2", "DO-2026-002", "Customer B - Bekasi", "03-03-2026"));
+
+        adapter = new DOAdapter(doList, doItem -> {
+            Intent intent = new Intent(this, StockPrepProductActivity.class);
+
+            intent.putExtra("NO_DO", doItem.getDoNo());
+            intent.putExtra("DATE_DO", doItem.getDoDate());
+
+            startActivity(intent);
         });
 
-        // Tombol Refresh
-        btnRefresh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(StockPrepActivity.this, "Refreshing DO List...", Toast.LENGTH_SHORT).show();
-            }
-        });
+        rvTags.setLayoutManager(new LinearLayoutManager(this));
+        rvTags.setAdapter(adapter);
 
-        // SIMULASI KLIK ITEM DO (Klik area putih list)
-        // Nanti kalau Adapter RecyclerView udah jadi, code Intent ini dipindah ke dalam Adapter
-        cardlistTag.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Buka halaman detail DO
-                Intent intent = new Intent(StockPrepActivity.this, StockPrepProductActivity.class);
-
-                // Opsional: Ngirim data DO dummy ke halaman sebelah
-                intent.putExtra("NO_DO", "DO-9999-XYZ");
-                intent.putExtra("DATE_DO", "23-02-2026");
-
-                startActivity(intent);
-            }
+        findViewById(R.id.btnRefresh).setOnClickListener(v -> {
+            Snackbar.make(v, "Refreshing DO List...", Snackbar.LENGTH_SHORT).show();
         });
     }
 }

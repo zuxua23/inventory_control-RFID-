@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="30dp"
     android:elevation="10dp"
-    android:layout_margin="20dp"
+    android:layout_margin="40dp"
     app:cardBackgroundColor="@color/white">
 
     <ImageButton

@@ -4,14 +4,13 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -30,12 +29,13 @@ public class HomeActivity extends AppCompatActivity {
 
     private ImageView ivProfile;
     private ImageButton btnStockIn, btnStockPrep, btnStockTaking, btnTagRegis, btnSearchItem;
+    private TextView tvNamaOperator, tvRoleOperator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        // Inisialisasi View
+
         ivProfile = findViewById(R.id.ivProfile);
         btnStockIn = findViewById(R.id.ButtonStockIn);
         btnStockPrep = findViewById(R.id.ButtonStockPreparation);
@@ -43,7 +43,18 @@ public class HomeActivity extends AppCompatActivity {
         btnTagRegis = findViewById(R.id.ButtonTagRegis);
         btnSearchItem = findViewById(R.id.ButtonSearchItem);
 
-        // Logic klik Profile -> Munculin pop-up Logout melayang
+        tvNamaOperator = findViewById(R.id.textViewNamaOperator);
+        tvRoleOperator = findViewById(R.id.textViewRoleOperator);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("UserSession", MODE_PRIVATE);
+        String fullName = sharedPreferences.getString("USER_FULLNAME", "Guest");
+        int roleId = sharedPreferences.getInt("ROLE_ID", 2);
+
+        String roleName = (roleId == 1) ? "Administrator" : "Operator IT";
+
+        tvNamaOperator.setText("Welcome " + fullName);
+        tvRoleOperator.setText(roleName);
+
         ivProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,7 +62,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        // Logic klik Menu -> Pindah Halaman
         View.OnClickListener menuClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,7 +90,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         };
 
-        // Konfirmasi kalau user pencet tombol Back di HP
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
@@ -90,7 +99,7 @@ public class HomeActivity extends AppCompatActivity {
                         .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                finish(); // Beneran nutup aplikasi
+                                finish();
                             }
                         })
                         .setNegativeButton("Tidak", null)
@@ -98,7 +107,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        // Terapin listener ke semua tombol menu
         btnStockIn.setOnClickListener(menuClickListener);
         btnStockPrep.setOnClickListener(menuClickListener);
         btnStockTaking.setOnClickListener(menuClickListener);
@@ -108,7 +116,6 @@ public class HomeActivity extends AppCompatActivity {
 
     private void showLogoutPopup(View anchorView) {
         CardView cardView = new CardView(this);
-        // Warna normal: Merah (#C62828)
         cardView.setCardBackgroundColor(Color.parseColor("#C62828"));
         cardView.setRadius(40f);
         cardView.setCardElevation(8f);
@@ -131,22 +138,18 @@ public class HomeActivity extends AppCompatActivity {
         popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         popupWindow.showAsDropDown(anchorView, 0, -20);
 
-        // --- TAMBAHIN EFEK HANGOVER DI SINI BRE ---
         cardView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, android.view.MotionEvent event) {
                 if (event.getAction() == android.view.MotionEvent.ACTION_DOWN) {
-                    // Pas ditekan: Warna jadi Merah lebih gelap (#8E1C1C)
                     cardView.setCardBackgroundColor(Color.parseColor("#8E1C1C"));
-                    // Efek mengecil dikit biar interaktif
                     cardView.animate().scaleX(0.95f).scaleY(0.95f).setDuration(50).start();
                 } else if (event.getAction() == android.view.MotionEvent.ACTION_UP ||
                         event.getAction() == android.view.MotionEvent.ACTION_CANCEL) {
-                    // Pas dilepas: Balikin ke warna asal
                     cardView.setCardBackgroundColor(Color.parseColor("#C62828"));
                     cardView.animate().scaleX(1f).scaleY(1f).setDuration(50).start();
                 }
-                return false; // False biar onClickListener di bawah tetep jalan
+                return false;
             }
         });
 
@@ -159,7 +162,6 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
-    // Method baru buat nampilin Dialog Konfirmasi Logout
     private void showLogoutConfirmationDialog() {
         Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -174,21 +176,23 @@ public class HomeActivity extends AppCompatActivity {
         Button btnNo = dialog.findViewById(R.id.btnNo);
         Button btnYes = dialog.findViewById(R.id.btnYes);
 
-        // Kalau batal (No)
         btnNo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog.dismiss(); // Tutup dialog aja
+                dialog.dismiss();
             }
         });
 
-        // Kalau yakin mau logout (Yes)
         btnYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
 
-                // Balik ke halaman Login
+                SharedPreferences sharedPreferences = getSharedPreferences("UserSession", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.clear();
+                editor.apply();
+
                 Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);

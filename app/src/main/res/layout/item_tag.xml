@@ -7,7 +7,11 @@
     android:layout_marginBottom="8dp"
     app:cardCornerRadius="20dp"
     app:cardBackgroundColor="@color/blue_theme"
-    app:cardElevation="4dp">
+    app:cardElevation="4dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:stateListAnimator="@animator/card_click_animator">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,7 +21,7 @@
         android:paddingVertical="10dp">
 
         <TextView
-            android:id="@+id/tvProductId"
+            android:id="@+id/tvTagId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="[Product ID]"

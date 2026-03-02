@@ -162,7 +162,7 @@
                     android:fontFamily="@font/raleway_bold"
                     android:text="Scanned : 0"
                     android:textColor="@color/white"
-                    android:textSize="15sp" />
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/tvNoDo"
@@ -172,7 +172,7 @@
                     android:fontFamily="@font/raleway_bold"
                     android:text="No : DO-1234-123"
                     android:textColor="@color/white"
-                    android:textSize="15sp" />
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/tvDateDo"
@@ -181,7 +181,7 @@
                     android:fontFamily="@font/raleway_bold"
                     android:text="Date : 12-12-2012"
                     android:textColor="@color/white"
-                    android:textSize="15sp" />
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
@@ -210,7 +210,7 @@
                         android:fontFamily="@font/raleway_bold"
                         android:text="RFID"
                         android:textColor="@color/blue_theme"
-                        android:textSize="15sp" />
+                        android:textSize="12sp" />
 
                     <Switch
                         android:id="@+id/switchRfid"
@@ -253,7 +253,7 @@
                 android:layout_height="wrap_content"
                 android:text="List Product:"
                 android:textColor="@color/blue_theme"
-                android:textSize="18sp"
+                android:textSize="15sp"
                 android:fontFamily="@font/raleway_bold"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
